@@ -1,0 +1,295 @@
+@import "colors";
+
+/* 共通 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  color:#1b515c;
+  font-family: "きんいろサンセリフ", sans-serif;
+  // GN-きんいろサンセリフ："GN-Kin-iro_SansSerif"
+}
+
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+// フォント
+@font-face {
+  font-family: 'きんいろサンセリフ';
+  src: font-url('GN-Kin-iro_SansSerif.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'MPLUS-Regular';
+  src: font-url('MPLUS1p-Regular.ttf') format('truetype');
+}
+.nomal-font{
+  font-family: "MPLUS-Regular", "Yu Gothic", "游ゴシック", sans-serif !important;
+}
+// contentの中のブロック
+.content__block{
+  background-color: #eee;
+  border-radius: 20px;
+  padding: 5%;
+  margin-top:5%;
+  margin-bottom: 10%;
+}
+.content__block-wide{
+  background-color: #eee;
+  border-radius: 20px;
+  padding: 2%;
+  margin-top:5%;
+  margin-bottom: 10%;
+}
+// フォントサイズ
+.font-md{
+  font-size: 15px;
+}
+.font-sm{
+  font-size: 12px;
+}
+.font-xs{
+  font-size: 8px;
+}
+// 通常12px、767px未満の時8px
+.responsive-font-sm{
+  font-size: 12px;
+}
+// 通常8px、767px未満の時5px
+.responsive-font-xs{
+  font-size: 8px;
+}
+@media (max-width: 767px) {
+  .font-xs-responsive{
+    font-size: 8px;
+  }
+  .font-sm-responsive{
+    font-size: 12px;
+  }
+  // 通常12px、767px未満の時8px
+  .responsive-font-sm{
+    font-size: 8px;
+  }
+  // 通常8px、767px未満の時5px
+  .responsive-font-xs{
+    font-size: 5px;
+  }
+}
+// ボタン
+@media (max-width: 767px){
+  .btn-xs{
+    font-size: 8px !important;
+    padding: 2px !important;
+  }
+}
+.right-btn{
+  float:right;
+  width:100px;
+}
+.white-btn{
+  background-color: $light-gray !important;
+  color:$public-main !important;
+  &:hover{
+    background-color: $white-gray !important;
+    color: $public-main !important;
+  }
+}
+.orange-btn{
+  background-color: #efa04c !important;
+  color:$white  !important;
+  &:hover{
+    background-color: $white-gray !important;
+    color:#efa04c !important;
+  }
+}
+.orange-btn-demo{
+  background-color: #efa04c !important;
+  color:$white  !important;
+}
+// 画像（丸型・小
+.small-image{
+  width:80px;
+  height: 80px;
+  border-radius: 50%;
+ }
+ .responsive-small-image{
+  width:80px;
+  height: 80px;
+  border-radius: 50%;
+ }
+ @media (max-width: 767px){
+  .responsive-small-image{
+    width:50px;
+    height: 50px;
+   }
+ }
+ .small-square-image{
+  width:50px;
+  height: 50px;
+  border-radius: 10%;
+ }
+ //  画像（四角型・中）
+ .middle-image{
+  border-radius: 10%;
+  width:80%
+ }
+ /* フォーム */
+ .input-form{
+  line-height: 200%;
+  width: 250px;
+  border-radius: 10px;
+}
+ .input-form-sm{
+  line-height: 200%;
+  width: 60%;
+  border-radius: 10px;
+ }
+.field,.actions{
+margin-bottom: 3%;
+}
+// タブ
+.common-nav-tabs {
+  border-color: $gray !important;
+}
+.common-nav-link{
+  width:100px;
+  height:50px;
+  font-size: 150%;
+  padding-top: 3px;
+  color: $gray;
+}
+.nav-link.active{
+  background-color: $gray !important;
+  color: #fff !important;
+  border-color: $gray !important;
+  border-radius: 10px 10px 0 0;
+}
+// タブ(767PX未満小）
+.sm-nav-tabs {
+  border-color: $gray !important;
+}
+.sm-nav-link{
+  width:100px;
+  height:50px;
+  font-size: 130%;
+  padding-top: 3px;
+  color: $gray;
+}
+.nav-link.active{
+  background-color: $gray !important;
+  color: #fff !important;
+  border-color: $gray !important;
+  border-radius: 10px 10px 0 0;
+}
+@media (max-width: 767px){
+  .sm-nav-link{
+    width:80px;
+    height:50x;
+    font-size: 100%;
+    padding-top: 1px;
+  }
+}
+// タブ（中身）
+#members,#follow{
+  padding-top: 5%;
+}
+// ボディ
+.body{
+  background-color:rgb(213, 230, 139);
+  text-align:center;
+  padding:5% 8% 5%;
+  width:75%;
+}
+/* ボディ：見出しに下線 */
+// 色は今後調整要
+.heading{
+  border-bottom: 1px solid #1b515c;
+  padding-bottom: 5%;
+  // ボディ：見出しの大きさ調整
+  &__en{
+    font-size: 100px;
+  }
+  &__ja{
+    font-size: 30px;
+  }
+}
+// ボディ：内容
+.content{
+  margin-top:10%;
+}
+// ブロックない見出し
+.block-hedding{
+  padding-bottom: 20px;
+}
+// ※印
+.must{
+  color: rgb(177, 74, 74);
+}
+@media (max-width: 1200px) {
+  .middle-image{
+    width: 150px;
+   }
+}
+
+@media (max-width: 767px) {
+  /* ボディ */
+  .body{
+    width:100%
+  }
+  .heading{
+    padding-top: 10%;
+    &__en{
+      font-size: 70px;
+    }
+    &__ja{
+      font-size: 20px;
+    }
+  }
+  .input-form{
+    line-height: 150%;
+    border-radius: 8px;
+  }
+ .middle-image{
+  width: 100px;
+ }
+}
+// ページネーション
+.paginate-bar{
+  display: flex;
+  justify-content: center;
+}
+// fontawesome(通知）
+.n-circle {
+  position: absolute;
+  font-size: 0.5rem;
+  padding-left: 1rem;
+  padding-top: 0rem;
+  color: #efa04c;
+}
+// fontawesome（public側)
+.public-icon{
+  color: #fff;;
+}
+// fontawesome（admin側)
+.admin-icon{
+  color: #fff !important;
+}
+// fontawesome（タブ)
+.tab-icon{
+  color: #626a6d ;
+  &:active{
+    color: #fff !important;
+  }
+}
+// 検索ボタン（public側)
+.public-search-btn{
+  color:#fff !important;
+}
+// フッター
+@media (max-width: 767px) {
+  .footer{
+    flex-direction:column;
+    line-height:1 !important;
+  }
+}

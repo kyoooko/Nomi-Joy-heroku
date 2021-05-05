@@ -1,0 +1,44 @@
+<header class="admin-header">
+  <%= render 'admin/logging_in_header' %>
+</header>
+<main class="row">
+  <div class="sidebar admin-sidebar">
+    <%= render 'admin/logging_in_slidebar' %>
+  </div>  
+  <div class="body">
+    <div class="heading">
+      <%# フラッシュメッセージ %>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <h3 class="heading__event-date admin"><%= @event.date.to_s(:date) %>（<%= @day_of_the_week %>）</h3>
+      <h1 class="heading__event-name admin"><%= @event.name %></h1>
+    </div>
+    <%= form_with model: @event,url: admin_event_path(@event.id), local: true,class:"edit-nomikai-form admin-table" do |f| %>
+      <table class="table table-borderless">
+        <tbody>
+          <tr>
+            <th scope="row" class="w-25">ノミカイ名<span class="must">&emsp;*</span></th>
+            <td class="nomal-font responsive-font-sm"><%= f.text_field :name, autofocus: true, autocomplete: "name", class:"create-event-form admin" %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="w-25">日にち&emsp;&emsp;</th>
+            <td class="nomal-font responsive-font-sm"><%= f.date_field :date, autofocus: true, autocomplete: "date", class:"create-event-form admin" %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="w-25">時間<span class="must">&emsp;&emsp;*</span></th>
+            <td class="nomal-font responsive-font-sm"><%= f.time_field :begin_time, autofocus: true, autocomplete: "start_time", class:"create-event-form--time admin" %>&emsp;〜&emsp;<%= f.time_field :finish_time, autofocus: true, autocomplete: "finish_time", class:"create-event-form--time admin" %></td>
+          </tr>
+          <tr>
+            <th scope="row" class="w-25">メモ&emsp;&emsp;</th>
+            <td class="nomal-font responsive-font-sm"><%= f.text_area :memo, autofocus: true, autocomplete: "memo", class:"create-event-textarea admin" %></td>
+          </tr>
+        </tbody>
+      </table>
+      <%= f.submit "更新", class:"btn blue-btn" %>
+    <% end %>
+    <%= render "layouts/footer" %>
+  </div>
+</main>

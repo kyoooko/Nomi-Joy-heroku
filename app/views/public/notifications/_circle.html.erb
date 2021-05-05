@@ -1,0 +1,9 @@
+<% if unchecked_notifications.any? %>
+  <span class="fa-stack" >
+    <i class="fas fa-bell fa-stack-2x public-icon" style="font-size: 1em;" ></i>
+    <i class="fas fa-circle n-circle fa-stack-1x"></i>
+  </span>Notice
+<% else%>
+  <i class="fas fa-bell public-icon"></i>&ensp;
+  Notice
+<% end %>

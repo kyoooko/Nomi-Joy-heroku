@@ -1,0 +1,53 @@
+<header class="public-header">
+  <%= render 'public/logging_out_header' %>
+</header>
+<main class="row">
+  <div class="sidebar public-sidebar">
+     <%= render 'public/logging_out_slidebar' %> 
+  </div>  
+  <div class="body body--logging-out">
+    <div class="heading">
+      <%# フラッシュメッセージ %>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <h1 class="heading__en">Login</h1>
+      <h3 class="heading__ja">ログイン</h3>
+    </div>
+    <div class="content">
+      <div class="content__block--new_user">
+        <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+          <div class="field">
+            <%= f.label :email %><span class="must">&emsp;*</span><br />
+            <%= f.email_field :email, autofocus: true, autocomplete: "email",class:"input-form" %>
+          </div>
+          <div class="field">
+            <%= f.label :password %><span class="must">&emsp;*</span>
+            <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+            <% end %><br />
+            <%= f.password_field :password, autocomplete: "new-password",class:"input-form" %>
+          </div>
+          <% if devise_mapping.rememberable? %>
+            <div class="field">
+              <%= f.check_box :remember_me,id:"remember_me" %>
+              <%= f.label :remember_me %>
+            </div>
+          <% end %>
+          <div class="actions sign-btns">
+            <%= f.submit "Login", class: "btn sign-btn green-btn" %>
+          </div>
+        <% end %>
+        <%# かんたんログイン %>
+        <%= render 'public/users/sessions/testuser' %>
+      </div>
+      <%# パスワード変更のリンクを作る場合は下記 %>
+      <%#= link_to new_user_password_path,class:"content__block--forget-pass" do %>
+       <%# Forgot your password? %>
+      <%# end %>
+    </div>
+    <%= render "layouts/footer" %>
+  </div>
+</main>

@@ -1,0 +1,111 @@
+<%# メンバー一覧(767px以上) %>
+<div class="content__block--menbers acordion"> 
+  <div class="block-hedding">
+    <h2 class="block-hedding__head">ノミカイメンバー一覧&emsp;<span class="symbol"><i class="fas fa-caret-down"></i></span></h2>
+    <div class="block-hedding__description">
+      <p class="text-secondary">「ノミカイメンバー」 とはマッチング（相互フォロー）しているユーザーです<br>「ノミカイメンバー」&nbsp;になると、DMをしたり、あなたがカンジをするノミカイに招待できます！<br><span class="must">※ 「ノミカイメンバー」 になると相手へメールアドレスが公開されます</span>
+      </p>
+    </div>
+  </div>
+  <% if members.present? %>
+    <table class="table members-table font-sm">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">氏名</th>
+          <th scope="col">会社名・所属</th>
+          <th scope="col">役職</th>
+          <th scope="col">お酒</th>
+          <th scope="col">好きな食べ物・お酒</th>
+          <th scope="col">苦手な食べ物・お酒</th>
+          <th scope="col">最寄駅</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% members.each do |member| %>
+          <%# 参照先のS3オブジェクトURLを作成 %>
+          <% image_url = "https://dmm-cloud-lesson10-image-files-resize.s3-ap-northeast-1.amazonaws.com/store/" + member.image_id + "-thumbnail." %>
+          <tr>
+            <%# S3+Lambdaで表示 %>
+            <th scope="row"><%= link_to user_path(member),class:"" do %><%= image_tag(image_url, fallback: "no_image.jpg", class:"small-image") %><% end %></th>
+            <td><%= link_to user_path(member),class:"nomal-font font-sm" do %><%= member.name %><% end %></td>
+            <td class="nomal-font font-xs"><%= member.belongs %></td>
+            <td class="nomal-font font-xs"><%= member.position %></td>
+            <td class="nomal-font"><% if  member.can_drink == true %>○<% else%>×<% end%></td>
+            <td class="nomal-font font-xs"><%= member.favolite %></td>
+            <td class="nomal-font font-xs"><%= member.unfavolite %></td>
+            <td class="nomal-font font-xs"><%= member.nearest_station %></td>
+            <td id="follow_form">
+            <%# フォローボタン（非同期） %>
+              <%= render "follow_button", member: member %>
+            </td>
+            <td><br><%=link_to room_path(member), class:"btn btn-sm green-btn" do %><i class="fas fa-comments public-icon"></i><% end %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+   <p class="text-secondary">まだメンバーはいません</p>
+  <% end %>
+</div>
+
+<%# 上記のレスポンシブ対応版 %>
+<%# メンバー一覧(767px未満) %>
+<div class="content__block--menbers-responsive acordion"> 
+  <div class="block-hedding">
+    <h2 class="block-hedding__head">ノミカイメンバー一覧&emsp;<span class="symbol"><i class="fas fa-caret-down"></i></span></h2>
+    <div class="block-hedding__description">
+      <p class="text-secondary">「ノミカイメンバー」 とはマッチング（相互フォロー）しているユーザーです<br>「ノミカイメンバー」&nbsp;になると、DMをしたり、あなたがカンジをするノミカイに招待できます！<br><span class="must">※ 「ノミカイメンバー」 になると相手へメールアドレスが公開されます</span>
+      </p>
+    </div>
+  </div>
+  <% if members.present? %>
+    <% members.each do |member| %>
+      <%# 参照先のS3オブジェクトURLを作成 %>
+      <% image_url = "https://dmm-cloud-lesson10-image-files-resize.s3-ap-northeast-1.amazonaws.com/store/" + member.image_id + "-thumbnail." %>
+      <table class="table table-borderless font-sm">        
+        <tbody>
+          <tr>
+            <%# S3+Lambdaで表示 %>
+            <th scope="row"  class="p-0"><%= link_to user_path(member),class:"" do %><%= image_tag(image_url, fallback: "no_image.jpg", class:"small-image") %><% end %></th>
+            <th scope="row"></th>
+            <td  class="p-0"><%= link_to user_path(member),class:"nomal-font font-md" do %><%= member.name %><% end %><br><br><p class="nomal-font font-xs"><%= member.belongs %>&emsp;<%= member.position %></p></td>
+          </tr>
+          <tr>
+            <th scope="row" ></th>
+            <th scope="row" class="p-0">お酒</th>
+            <td class="nomal-font p-0"><% if  member.can_drink == true %>○<% else%>×<% end%></td>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <th scope="row" class="p-0">好き</th>
+            <td class="nomal-font font-xs p-0"><%= member.favolite %></td>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <th scope="row" class="p-0">嫌い</th>
+            <td class="nomal-font font-xs p-0"><%= member.unfavolite %></td>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <th scope="row" class="p-0">最寄駅</th>
+            <td class="nomal-font font-xs p-0"><%= member.nearest_station %></td>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <th scope="row"><br><%=link_to room_path(member), class:"btn btn-sm green-btn" do %><i class="fas fa-comments public-icon"></i><% end %></th>
+            <td id="follow_form">
+              <%# フォローボタン（非同期） %>
+              <%= render "follow_button", member: member %>
+            </td>
+          </tr>
+          <hr>
+        </tbody>
+      </table>
+    <% end %>
+  <% else %>
+   <p class="text-secondary">まだメンバーはいません</p>
+  <% end %>
+</div>

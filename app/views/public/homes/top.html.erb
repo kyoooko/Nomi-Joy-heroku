@@ -1,0 +1,82 @@
+<main>
+  <div class="main-visual">
+    <div class="container">
+      <%# フラッシュメッセージ %>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <%= image_tag("Nomi-Joy.png", class: "main-visual__logo") %>
+      <h1 class="main-visual__catch-copy">ノミカイの準備を楽しく、便利に。</h1>
+      <div class="main-visual__sign">
+        <%= link_to new_user_registration_path,class:"btn green-btn mr-2" do %>Sign up<% end %>
+        <%= link_to new_user_session_path,class:"btn blue-btn" do %>Login<% end %>
+        <%# かんたんログイン %>
+        <%= render 'public/users/sessions/testuser' %>
+        <p class="text-muted nomal-font responsive-font-xs">※ かんたんログインはポートフォリオ閲覧用です。<br>メールアドレス等を入力せず閲覧いただけます。</p>
+      </div>   
+    </div>
+  </div>
+  <div class="about">
+    <h1 class="about__heading">What about <%= image_tag("Nomi-Joy_letter_white.jpg", class: "about_heading-logo") %> ?</h1>
+    <div class="about__content">
+      <div class="about-all">
+        <h4>ノミジョイ！は、 「ノミカイの準備を楽しく、便利に」 するサービスです。<br>ノミカイ参加者の方もカンジの方もかんたんにお使いいただけます。<br>まずはログインから！</h4>
+        <p class="text-muted nomal-font responsive-font-xs">※このサイトは、ポートフォリオ用に制作しているものであるため、<br>現段階では定期的にデータを削除をしております。<br>あらかじめご了承ください。</p>
+      </div>
+      <div class="about-2way row">
+        <div class="about-Nomi-Joy col-md-6">
+          <%= image_tag("Nomi-Joy.png", class: "about-Nomi-Joy__logo") %>
+          <p class="text-muted">参加者の方用ページです。<br>ログインしていただくとまずは参加者側に入ります。</p>
+          <div class="about-Nomi-Joy__content">
+            <h2><span class="title">Step 1<%= image_tag("edamame.png", class: "step-small-image") %>ノミカイの予定が一目でわかる ！</span></h2>
+            <%= image_tag("top-public-step1.JPG", class: "descreption-image") %>
+          </div>
+          <div class="about-Nomi-Joy__content">
+            <h2><span  class="title">Step 2<%= image_tag("negima.png", class: "step-small-image") %>場所や会費がすぐにわかる ！</span></h2>
+            <%= image_tag("top-public-step2.JPG", class: "descreption-image") %>
+          </div>
+          <div class="about-Nomi-Joy__content">
+            <h2><span  class="title">Step 3<%= image_tag("tyouchin.png", class: "step-small-image") %>カンジへの連絡もスムーズ ！</span></h2>
+             <%= image_tag("top-public-step3.JPG", class: "descreption-image") %>
+          </div>
+          <div class="about-Nomi-Joy__content">
+            <h2><span  class="title">Step 4<%= image_tag("nihonshu.png", class: "sm-step-small-image") %> ノミカイ前日にメールでお知らせ ！</span></h2>
+             <%= image_tag("top-public-step4.JPG", class: "descreption-image") %>
+          </div>
+        </div>
+        <div class="about-Kanjino-Heya col-md-6">
+          <%= image_tag("Kanjino-Heya.png", class: "about-Kanjino-Heya__logo") %>
+           <p class="text-muted">カンジの方用ページです。<br>参加者側ページから「カンジの部屋」のロゴをクリックすると入室できます。</p>
+          <div class="about-Kanjino-Heya__content">
+            <h2><span  class="title admin">Step 1<%= image_tag("edamame.png", class: "step-small-image") %>カンジの部屋へ入室 ！</span></h2>
+            <%= image_tag("top-admin-step1.JPG", class: "descreption-image") %>
+          </div>
+          <div class="about-Kanjino-Heya__content">
+            <h2><span  class="title admin">Step 2<%= image_tag("negima.png", class: "step-small-image") %>メンバーを招待してノミカイを作成 ！</span></h2>
+            <%= image_tag("top-admin-step2.JPG", class: "descreption-image") %>
+          </div>
+          <div class="about-Kanjino-Heya__content">
+            <h2><span  class="title admin">Step 3<%= image_tag("tyouchin.png", class: "step-small-image") %>集金の管理ができる ！</span></h2>
+            <%= image_tag("top-admin-step3.JPG", class: "descreption-image") %>
+          </div>
+          <div class="about-Kanjino-Heya__content">
+            <h2><span  class="title admin">Step 4<%= image_tag("nihonshu.png", class: "sm-step-small-image") %> ToDo リストで自分用のメモ ！</span></h2>
+            <%= image_tag("top-admin-step4.JPG", class: "descreption-image") %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<footer class="top-footer">
+  <div class="container">
+    <div class="d-flex justify-content-center footer">
+      <p class="mb-0 copyright">Copyright(c)  2020 Nomi-Joy! Co.,Ltd</p>&emsp;
+      <%= link_to "https://api.gnavi.co.jp/api/scope/", target: :_blank do %>
+        <%= image_tag("https://api.gnavi.co.jp/api/img/credit/api_155_20.gif") %>
+      <% end %>
+    </div>
+  </div>
+</footer>

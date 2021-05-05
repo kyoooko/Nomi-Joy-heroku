@@ -1,0 +1,77 @@
+<p class="text-muted room-description"><i class="fas fa-key text-muted"></i>&nbsp;集金 の部屋&nbsp;<i class="fas fa-key text-muted"></i></p>
+<!-- 未払い飲み会一覧 -->
+<div class="content__block__unpaid-nomikai content__block admin-table">
+  <h2 class="block-hedding">集金中のノミカイ</h2>
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">日時</th>
+        <th scope="col">ノミカイ名</th>
+        <th scope="col">集金中の人数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% events.each do |event| %>
+        <% unpaying_users = EventUser.with_deleted.where(event_id: event.id, fee_status: false) %>
+        <% if unpaying_users.present? %>
+          <tr>
+            <td class="nomal-font font-xs-responsive"><%= event.date.to_s(:date) %>（<%= %w(日 月 火 水 木 金 土)[event.date.wday] %>）</td>
+            <td><%= link_to admin_event_path(event),class:"nomal-font  font-xs-responsive" do %><%= event.name %><% end %></td>
+            <td class="nomal-font  font-xs-responsive"><%= unpaying_users.count %>人</td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<div class="content__block__unpaid-user-sum content__block admin-table">
+  <h2 class="block-hedding">集金中のメンバー</h2>
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">氏名</th>
+        <th scope="col">内訳</th>
+        <th scope="col">合計</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <%# 参照先のS3オブジェクトURLを作成 %>
+        <% image_url = "https://dmm-cloud-lesson10-image-files-resize.s3-ap-northeast-1.amazonaws.com/store/" + user.image_id + "-thumbnail." %>
+        <tr>
+          <%# S3+Lambdaで表示 %>
+          <th scope="row"><%= link_to admin_user_path(user),class:"" do %><%= image_tag(image_url, fallback: "no_image.jpg", class:"small-image") %><% end %></th>
+          <td style="width:15%;"><%= link_to admin_user_path(user),class:"nomal-font responsive-font-sm" do %><%= user.name %><% end %></td>
+          <td class="nomal-font font-xs">
+            <%# 「current_userが幹事のノミカイで、未支払いの飲み会があるUser」に紐づく、current_userが幹事のノミカイのevent_userの配列 %>
+            <% event_users = user.event_users.with_deleted.where(fee_status: false).includes(:event).where(events:{user_id: current_user.id}) %>
+            <% sum = 0 %>
+            <% event_users.each do |event_user| %>
+              <% unless event_user.deleted_at.nil? %>
+                <span class="badge badge-danger">欠席</span>
+              <% end %>
+              <%= link_to admin_event_path(event_user.event_id),class:"nomal-font font-xs" do %>
+                <%= event_user.event.date.to_s(:date) %>（<%= %w(日 月 火 水 木 金 土)[event_user.event.date.wday] %>）
+                <%= event_user.event.name %>
+              <% end %>
+              <%= event_user.fee %>円
+              <% sum = sum + event_user.fee.to_i %>
+              <br>
+            <% end %>
+          </td>
+          <td class="nomal-font responsive-font-sm"><%= sum %>円</td>
+          <td>
+            <% unless current_user == user %>
+              <%=link_to admin_room_path(user), class:"btn btn-sm blue-btn" do %><i class="fas  fa-comments admin-icon"></i><% end %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+
+
+

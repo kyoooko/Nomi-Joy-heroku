@@ -1,0 +1,48 @@
+<header class="public-header">
+  <%= render 'public/logging_in_header' %>
+</header>
+<main class="row">
+  <div class="sidebar public-sidebar">
+    <%= render 'public/logging_in_slidebar' %>
+  </div>  
+  <!-- Go toカンジの部屋ボタン（767px以下のみ） -->
+  <%= render 'public/events/go_to_kanjino_heya_button' %>
+  <div class="body">
+    <div class="heading--non-underline">
+      <%# フラッシュメッセージ %>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <h1 class="heading__en">Members</h1>
+      <h3 class="heading__ja">メンバー & フォロー</h3>
+    </div>
+    <div class="content">
+      <!-- タブリンク -->
+      <ul class="nav nav-tabs common-nav-tabs">
+        <li class="nav-item">
+          <a href="#members" class="nav-link common-nav-link active" data-toggle="tab">メンバー</a>
+        </li>
+        <li class="nav-item">
+          <a href="#follow" class="nav-link common-nav-link" data-toggle="tab">フォロー</a>
+        </li>
+      </ul>
+      <!-- タブ中身 -->
+      <div class="tab-content">
+        <!-- タブ１ -->
+        <div id="members" class="tab-pane active">
+          <%= render 'tab1', members: @members %>
+        </div>
+        <!-- タブ２ -->
+        <div id="follow" class="tab-pane">
+          <%= render 'tab2', users: @users, followers: @followers, followings: @followings, find_users:@find_users %>
+        </div>
+      </div>
+    </div>
+    <%= render "layouts/footer" %>
+  <div>
+</main>
+
+
+

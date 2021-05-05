@@ -1,0 +1,63 @@
+@import "../colors";
+
+// ボタン
+.blue-btn{
+  background-color: $admin-main !important;
+  color:$white  !important;
+  &:hover{
+    background-color: $light-gray !important;
+    color:$admin-main !important;
+  }
+}
+.blue-btn-demo{
+  background-color: $admin-main !important;
+  color:$white  !important;
+}
+.admin-white-btn{
+  background-color: $light-gray !important;
+  color:$admin-main !important;
+  &:hover{
+    background-color: $white-gray !important;
+    color: $admin-main !important;
+  }
+}
+/* ノミカイ新規作成ボタン（枝豆）*/
+.create-event{
+  position:fixed;
+  right:50px;
+  bottom:50px;
+  z-index:99 !important;
+}
+.create-event-edamame{
+  width:200px;
+}
+@media (max-width: 767px) {
+  .create-event{
+    right:20px;
+    bottom:30px;
+  }
+  .create-event-edamame{
+    width:130px;
+  }
+}
+/* サイドバー、ヘッダー */
+.admin-nav-item{
+  color:#fff;
+  line-height: 3rem;
+  display: block;
+}
+.admin-nav-item:hover{
+  color:#fff;
+  text-decoration: none;
+  background-color: #aac4cf;
+}
+
+ /* ベースカラー変更 */
+ .admin{
+  color:#267594 !important;
+ }
+//  テーブル
+.admin-table th, .admin-table td, .admin-table h2, .admin-table h3, .admin-table h4{
+  color:#267594 !important;
+}
+

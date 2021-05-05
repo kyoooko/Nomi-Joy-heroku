@@ -1,0 +1,104 @@
+<header class="admin-header">
+  <%= render 'admin/logging_in_header' %>
+</header>
+<main class="row">
+  <div class="sidebar admin-sidebar">
+    <%= render 'admin/logging_in_slidebar' %>
+  </div>  
+  <div class="body">
+    <div class="heading">
+      <h5 class="heading__create-event admin">ノミカイをつくる</h5>
+      <h1 class="heading__en admin">確認画面</h1>
+    </div>
+    <div class="content">
+      <div class="content__block--step-bar admin-table">
+      <%# ステップバー（Bootstrap・見た目のみ） %>
+      <div class="create-nomikai-stepbar">
+        <ul class="bootstrapWizard form-wizard">
+          <li class="" data-target="#step1"><span class="step">1</span></li>
+          <li data-target="#step2" class=""><span class="step">2</span></li>
+          <li data-target="#step3" class=""><span class="step">3</span></li>
+          <li data-target="#step3" class=""><span class="step">4</span></li>
+          <li data-target="#step3" class="active"><span class="step">5</span></li>
+        </ul>
+        <div class="clearfix"></div>
+      </div> 
+      <div class="content__block--confirm content__block">
+        <%= form_with model: @event, url: admin_events_path, local: true do |f| %>
+          <table class="table table-borderless">
+            <tbody>
+              <tr>
+                <th scope="row">ノミカイ名</th>
+                <td class="nomal-font"><%= @event.name %></td>
+              </tr>
+              <tr>
+                <th scope="row">日にち</th>
+                <td class="nomal-font responsive-font-sm"><%= @event.date.to_s(:date_jp) %>（<%= @day_of_the_week %>）</td>
+              </tr>
+              <tr>
+                <th scope="row">時間</th>
+                <td class="nomal-font responsive-font-sm"><%= @event.begin_time.to_s(:time) %>&emsp;〜&emsp;<%= @event.finish_time.to_s(:time) %></td>
+              </tr>
+              <tr>
+                <th scope="row">場所</th>
+                <td class="nomal-font responsive-font-sm"><%= @restautant_name %></td>
+              </tr>
+              <tr>
+                <th scope="row">メモ</th>
+                <td class="nomal-font responsive-font-sm"><%= @event.memo %></td>
+              </tr>
+              <tr>
+                <th scope="row">参加者</th>
+                <td class="nomal-font responsive-font-sm">
+                  <%# カンジ %>
+                  <%# 【★幹事＝user_id使用】 %>
+                  <%= User.find(@event.user_id).name %>（カンジ）&emsp;<%= @admin_fee %>円<br />
+                  <%# カンジ以外の参加メンバー %>
+                  <%# 参加メンバーを選択しなかった場合でもエラーにならないようにするためのif文 %>
+                  <% if @event_user_ids.present? %>
+                    <% @event_user_ids.zip(@event_user_fees).each do |event_user_id,event_user_fee| %>
+                      <%= User.find(event_user_id.to_i).name %>&emsp;<%= event_user_fee %>円<br />
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <%= f.hidden_field :name %>
+          <%= f.hidden_field :date %>
+          <%= f.hidden_field :begin_time %>
+          <%= f.hidden_field :finish_time %>
+          <%= f.hidden_field :restaurant_id %>
+          <%= f.hidden_field :memo %>
+          <div class="resposive-actions"> 
+            <%= f.submit "戻る", name: :back, class: "btn admin-white-btn" %>
+            <%= f.button type: "submit", class:"btn blue-btn"  do %><i class="fas fa-bell admin-icon"></i>&ensp;つくる<% end %>
+            <%= f.button type: "submit", name: :mail, class:"btn orange-btn"  do %><i class="fas fa-bell admin-icon"></i>&nbsp;<i class="fas fa-envelope admin-icon"></i>&ensp;つくる （メールで通知する）<% end %>
+            <span class="modal-btn modal-btn-responsive-right" id="invite-modal-btn"><i class="far fa-question-circle"></i></span>
+          </div> 
+        <% end %>
+      </div>
+    </div>
+    <%= render "layouts/admin_footer" %>
+  </div>
+</main>
+<%# モーダル表示画面 %>
+<%= render 'modals/admin_event_confirm' %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

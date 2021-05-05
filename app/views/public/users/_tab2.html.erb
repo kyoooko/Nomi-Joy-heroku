@@ -1,0 +1,91 @@
+<div class="content__block__search-users content__block acordion">
+  <div class="block-hedding">
+    <h2 class="block-hedding__head">ユーザーを探す&emsp;<span class="symbol"><i class="fas fa-caret-down"></i></span></h2>
+    <div class="block-hedding__description">
+      <p class="text-secondary">「ノミジョイ！ID」&nbsp;で新しいユーザーを探せます
+      </p>
+    </div>
+  </div>
+  <%# 検索フォーム(非同期) %>
+  <%= render 'public/searches/member_search_form', find_users:@find_users %>
+</div>
+<div class="content__block__followed acordion">
+  <div class="block-hedding">
+    <h2 class="block-hedding__head">承認依頼の来ているユーザー&emsp;<span class="symbol"><i class="fas fa-caret-down"></i></span></h2>
+    <div class="block-hedding__description">
+      <p class="text-secondary">下記のユーザーから承認申請（フォロー）が来ています<br>フォローを返して&nbsp;「ノミカイメンバー」&nbsp;になりましょう！
+      </p>
+    </div>
+  </div>
+  <% if followers.present? %>
+    <table class="table members-table font-sm">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">氏名</th>
+          <th scope="col">会社名・所属・役職</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% followers.each do |follower| %>
+          <%# 参照先のS3オブジェクトURLを作成 %>
+           <% image_url = "https://dmm-cloud-lesson10-image-files-resize.s3-ap-northeast-1.amazonaws.com/store/" + follower.image_id + "-thumbnail." %>
+          <tr>
+            <%# S3+Lambdaで表示 %>
+            <th scope="row"><%= link_to user_path(follower),class:"" do %><%= image_tag(image_url, fallback: "no_image.jpg", class:"responsive-small-image") %><% end %></th>
+            <td style="width:25%"><%= link_to user_path(follower),class:"nomal-font font-sm" do %><%= follower.name %><% end %></td>
+            <td class="nomal-font responsive-font-sm"><%= follower.belongs %><br><%= follower.position %></td>
+            <td>
+              <%# フォローボタン（非同期） %>
+              <%= render "follow_button", member: follower %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+   <p class="text-secondary">他のユーザーからの承認依頼はありません</p>
+  <% end %>
+</div>
+<hr>
+<div class="content__block__following acordion">
+  <div class="block-hedding">
+    <h2 class="block-hedding__head">承認申請中のユーザー&emsp;<span class="symbol"><i class="fas fa-caret-down"></i></span></h2>
+    <div class="block-hedding__description">
+      <p class="text-secondary">下記のユーザーへ承認申請（フォロー）を送信済みです<br>相手がに承認されると&nbsp;「ノミカイメンバー」&nbsp;になり、あなたがカンジをするノミカイに招待できます！
+      </p>
+    </div>
+  </div>
+  <% if followings.present? %>
+    <table class="table members-table font-sm">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">氏名</th>
+          <th scope="col">会社名・所属・役職</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% followings.each do |following| %>
+          <%# 参照先のS3オブジェクトURLを作成 %>
+          <% image_url = "https://dmm-cloud-lesson10-image-files-resize.s3-ap-northeast-1.amazonaws.com/store/" + following.image_id + "-thumbnail." %>
+          <tr>
+            <%# 申請中のユーザーはユーザー詳細ページにいけない %>
+            <%# S3+Lambdaで表示 %>
+            <th scope="row"><%= image_tag(image_url, fallback: "no_image.jpg", class:"responsive-small-image") %></th>
+            <td class="nomal-font font-sm" style="width:25%"><%= following.name %></td>
+            <td class="nomal-font responsive-font-sm"><%= following.belongs %><br><%= following.position %></td>
+            <td>
+              <%# フォローボタン（非同期） %>
+              <%= render "follow_button", member: following %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+   <p class="text-secondary">承認依頼をしているユーザーはいません</p>
+  <% end %>
+</div>

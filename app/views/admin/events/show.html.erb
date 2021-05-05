@@ -1,0 +1,59 @@
+<header class="admin-header">
+  <%= render 'admin/logging_in_header' %>
+</header>
+<main class="row">
+  <div class="sidebar admin-sidebar">
+    <%= render 'admin/logging_in_slidebar' %>
+  </div>  
+  <div class="body">
+    <div class="heading-non--underline">
+      <%# フラッシュメッセージ %>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <h3 class="heading__event-date admin"><%= @event.date.to_s(:date) %>（<%= @day_of_the_week %>）</h3>
+      <h1 class="heading__event-name admin"><%= @event.name %></h1>
+    </div>
+    <!-- 新規作成ボタン -->
+    <%= render 'admin/events/create_event_button' %>
+    <div class="content">
+      <!-- タブリンク -->
+      <ul class="nav nav-tabs sm-nav-tabs">
+        <li class="nav-item">
+          <a href="#top" class="nav-link sm-nav-link <%= 'active' if @room == 1 %>" data-toggle="tab">概要</a>
+        </li>
+        <li class="nav-item">
+          <a href="#participants" class="nav-link sm-nav-link  <%= 'active' if @room == 2 %>" data-toggle="tab">参加者</a>
+        </li>
+        <li class="nav-item">
+          <a href="#nomikai-fee" class="nav-link sm-nav-link  <%= 'active' if @room == 3 %>" data-toggle="tab">会費</a>
+        </li>
+        <li class="nav-item">
+          <a href="#restaurant" class="nav-link sm-nav-link  <%= 'active' if @room == 4 %>" data-toggle="tab">お店</a>
+        </li>
+      </ul> 
+      <!-- タブ中身 -->
+      <div class="tab-content">
+        <!-- タブ１ -->
+        <div id="top" class="tab-pane <%= 'active' if @room == 1 %>">
+          <%= render 'tab1', event: @event, day_of_the_week: @day_of_the_week %>
+        </div>
+        <!-- タブ２ -->
+        <div id="participants" class="tab-pane <%= 'active' if @room == 2 %>">
+          <%= render 'tab2', event: @event, event_users: @event_users %>
+        </div>
+        <!-- タブ３ -->
+        <div id="nomikai-fee" class="tab-pane <%= 'active' if @room == 3 %>">
+          <%= render 'tab3', unpaying_event_users: @unpaying_event_users, event_users: @event_users  %>
+        </div>
+        <!-- タブ４ -->
+        <div id="restaurant" class="tab-pane <%= 'active' if @room == 4 %>">
+          <%= render 'tab4', event: @event %>
+        </div> 
+      </div>
+    </div>
+    <%= render "layouts/admin_footer" %>
+  </div>
+</main>

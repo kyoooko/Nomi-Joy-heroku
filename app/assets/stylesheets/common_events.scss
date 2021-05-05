@@ -1,0 +1,147 @@
+// 今日のノミカイ・カンジ側show
+// ノミカイ名を大きく表示
+.content__block--today tr:first-child td{
+  font-size: 150%;
+  font-weight: bold;
+}
+// 今日のノミカイの画像(767px未満）
+.restaurant-image-responsive{
+  display:none;
+}
+.heading__top-welcome{
+  font-size: 80px !important;
+  }
+@media (max-width: 1000px) {
+  .heading__top-welcome{
+  font-size: 60px !important;
+  }
+}
+@media (max-width: 767px) {
+  .heading__top-welcome{
+  font-size: 45px !important;
+  }
+  .content__block--today,.content__block--nomikai-overview, .content__block--restaurant, .content__block--overview{
+    // 今日のノミカイの画像(767px以上）
+    .restaurant-image{
+      display:none;
+    }
+    .restaurant-image-responsive{
+      display:inline-block;
+    }
+    .restaurant{
+      display: block;
+    }
+  }
+}
+@media (max-width: 400px) {
+  .heading__top-welcome{
+  font-size: 30px !important;
+  }
+}
+// ******カレンダー**********************************
+.simple-calendar {
+  .day {
+  }
+  .wday-0 {
+    color:rgb(177, 74, 74);
+    background-color: rgb(233, 207, 207);
+  }
+  .wday-1 {
+    background-color: #fff;
+  }
+  .wday-2 {
+    background-color: #fff;
+  }
+  .wday-3 {
+    background-color: #fff;
+  }
+  .wday-4 {
+    background-color: #fff;
+  }
+  .wday-5 {
+    background-color: #fff;
+  }
+  .wday-6 {
+    color:rgb(82, 110, 189);
+    background-color: rgb(178, 219, 235);
+  }
+
+  .today {}
+  .past {}
+  .future {}
+
+  .start-date {}
+
+  .prev-month {
+  }
+  .next-month { }
+  .current-month {}
+
+  .has-events {}
+}
+.calendar-heading{
+  font-size: 50px;
+}
+.calendar{
+  p{
+    margin: 0 !important;
+  }
+  &__time{
+  font-size: 10px;
+  }
+  &__restaurant{
+    font-size: 10px;
+  }
+  &__days td{
+    height: 170px !important;
+  }
+}
+.next-back{
+  margin: 0 5%;
+  font-size: 30px;
+  &:hover{
+    text-decoration: none;
+  }
+}
+// カンジ側のカレンダー文字色
+.admin-calendar .calendar-title, .admin-calendar th, .admin-calendar .wday-1, .admin-calendar th, .admin-calendar .wday-2, .admin-calendar th, .admin-calendar .wday-3, .admin-calendar th, .admin-calendar .wday-4, .admin-calendar th, .admin-calendar .wday-5{
+  color:#267594 !important;
+}
+
+@media (max-width: 767px) {
+  // カレンダー
+  .calendar-heading{
+    font-size: 40px;
+  }
+  .calendar{
+    line-height: 1.1 !important;
+    &__time{
+      font-size: 6px;
+      margin-bottom: 1px;
+    }
+    &__restaurant{
+      font-size: 6px;
+    }
+    &__days td{
+      height: 130px !important;
+    }
+  }
+}
+// *************************************************
+// マップ
+.google-map{
+  display: flex;
+  justify-content: center;
+}
+#map {
+  height: 500px;
+  width: 80%;
+}
+@media (max-width: 767px) {
+  .google-map{
+    height: 300px;
+    }
+  #map{
+    height: 300px;
+  }
+}

@@ -1,0 +1,111 @@
+// Place all the styles related to the homes controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "colors";
+
+.container{
+  text-align: center;
+}
+.main-visual{
+  padding-top: 30px;
+  padding-bottom: 40px;
+  background-color:$main;
+}
+.main-visual__logo{
+  margin-top: 50px;
+  width:300px;
+  height:300px;
+}
+.main-visual__catch-copy{
+  margin: 50px 0 50px 0;
+}
+.about__heading{
+margin: 0 auto;
+text-align: center;
+height:100px;
+line-height: 100px;
+background-color: $public-main;
+color:$white;
+ }
+ .about_heading-logo{
+  height:60px;
+ }
+ @media (max-width: 767px) {
+  .about__heading{
+    font-size: 30px;
+    }
+    .about_heading-logo{
+    height:40px;
+    }
+}
+ .about__content{
+  text-align: center;
+  padding: 50px 50px;
+  background-color:$white-gray;
+ }
+ .about-all{
+  margin: 0 auto;
+  padding-top: 30px;
+  padding-bottom: 30px;
+ }
+ .about-2way{
+  display: flex;
+  justify-content: space-around;
+ }
+ .about-Nomi-Joy__logo,.about-Kanjino-Heya__logo{
+  width:200px;
+  height:200px;
+  margin-bottom: 30px;
+ }
+ .about-Nomi-Joy__content,.about-Kanjino-Heya__content{
+   padding:3%;
+   margin-bottom:30px;
+   border-radius: 30px;
+   background-color: $light-gray;
+ }
+ .top-footer{
+  height:80px;
+  line-height: 80px;
+  background-color:$white-gray;
+  background-color:$main;
+ }
+ @media (max-width: 767px) {
+  .copyright{
+    margin-top: 15px;
+  }
+  .about__content h4{
+    font-size:16px;
+  }
+ }
+ // 画像（step)
+.step-small-image{
+  width:38px;
+  height:38px;
+}
+.sm-step-small-image{
+  width:30px;
+  height:30px;
+}
+// 画像（説明)
+.descreption-image{
+  width:90%;
+  padding-top:4%;
+}
+.descreption-image{
+  width:90%;
+  padding-top:4%;
+}
+// 見出しのマーカー
+.about-Nomi-Joy, .about-Kanjino-Heya{
+  .title {
+    background:linear-gradient(transparent 70%, #e2eeaf 0%);
+    }
+}
+// 見出しのサイズ
+@media (max-width: 767px) {
+  .about-Nomi-Joy__content, .about-Kanjino-Heya{
+    .title {
+      font-size: 0.7em;
+    }
+  }
+}

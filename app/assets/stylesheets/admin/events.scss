@@ -1,0 +1,459 @@
+// Place all the styles related to the admin/Events controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// 共通部分
+// 767px以下の場合３つのボタンを縦に配置＋？を右上に配置(confirm・add_event_user_fee)
+@media (max-width: 767px) {
+  .resposive-actions{
+    display: flex;
+    flex-direction: column-reverse;
+    .btn{
+      margin-bottom: 5px;
+    }
+  }
+}
+// ***ステップバー共通部分（Bootstrap・見た目のみ）**********
+.bootstrapWizard li:before {
+  border-top: 3px solid #55606E;
+  content: "";
+  display: block;
+  font-size: 0;
+  overflow: hidden;
+  position: relative;
+  top: 11px;
+  right: 1px;
+  width: 100%;
+  z-index: 1
+}
+.bootstrapWizard li:first-child:before {
+  left: 50%;
+  max-width: 50%
+}
+.bootstrapWizard li:last-child:before {
+  max-width: 50%;
+  width: 50%
+}
+.bootstrapWizard li .step {
+  background: #B2B5B9;
+  color: #fff;
+  display: inline;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 12px;
+  padding: 7px 13px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  line-height: normal;
+  position: relative;
+  text-align: center;
+  z-index: 2;
+  transition: all .1s linear 0s
+}
+.bootstrapWizard li.active .step,.bootstrapWizard li.active.complete .step {
+  background: #267594;
+  color: #fff;
+  font-weight: 700;
+  padding: 7px 13px;
+  font-size: 15px;
+  border-radius: 50%;
+  border: 3px solid #55606E
+}
+.bootstrapWizard li.complete .title,.bootstrapWizard li.active .title {
+  color: #2B3D53
+}
+.bootstrapWizard li .title {
+  color: #bfbfbf;
+  display: block;
+  font-size: 13px;
+  line-height: 15px;
+  max-width: 100%;
+  position: relative;
+  table-layout: fixed;
+  text-align: center;
+  top: 20px;
+  word-wrap: break-word;
+  z-index: 104
+}
+// ***************************************************
+// adminトップページ(index)
+// 見出し
+.heading__top-welcome{
+  font-size: 40px;
+}
+.admin-top-logo{
+  width: 70%;
+}
+@media (max-width: 767px) {
+  .heading__top-welcome{
+  font-size: 20px;
+  }
+}
+// 部屋の説明
+.room-description{
+  font-size: 20px;
+  margin-top: 30px;
+}
+@media (max-width: 767px) {
+  .room-description{
+    font-size: 16px;
+  }
+}
+/* タブ1(index) */
+.stepbar{
+  margin-bottom: 30px;
+}
+// ToDoリスト
+.content__block--todo {
+  .todo-form{
+    margin-bottom: 30px;
+  }
+  table{
+    width: 80%;
+    margin: 0 auto;
+  }
+  .todo-btn{
+    &:hover{
+      color:#267594 !important;
+    }
+  }
+}
+// タブ２(index)
+.content__block__all-nomikai h4{
+  margin-top: 5px;
+}
+@media (max-width: 767px) {
+  .content__block__all-nomikai h4{
+    font-size: 16px;
+  }
+}
+// *****タブ２(index)：ステップバー（Bootstrap・見た目のみ）*******
+// stepbar
+.all-nomikai__stepbar{
+ margin-bottom: 30px;
+
+  .bootstrapWizard li {
+    display: block;
+    float: left;
+    width: 33%;
+    text-align: center;
+    padding-left: 0
+  }
+}
+// content
+.all-nomikai__content{
+  display: flex;
+  justify-content:space-around;
+  .partition{
+    background-color: #dfdfdf;
+    border-radius: 20px;
+    font-size: 12px;
+    width:31%;
+  }
+}
+// **********************************
+
+// タブ３(index)
+.content__block__unpaid-user-sum{
+  table td{
+  vertical-align: middle;
+  }
+}
+@media (max-width: 767px) {
+  .content__block__unpaid-nomikai{
+    table th{
+      font-size: 0.8rem;
+    }
+  }
+  .content__block__unpaid-user-sum{
+    table td {
+      padding:0.3rem;
+      vertical-align: top;
+    }
+    table th{
+      font-size: 0.8rem;
+    }
+    .small-image{
+      width: 50px;
+      height:50px;
+    }
+  }
+  .content__block__unpaid-nomikai table td{
+    vertical-align: middle;
+    padding: 0;
+  }
+}
+// タブ４(index)
+.content__block__unpaid{
+  table td {
+    vertical-align: middle;
+  }
+}
+@media (max-width: 767px) {
+  .content__block__unpaid{
+    table td {
+      padding:0.3rem;
+      vertical-align: top;
+    }
+  }
+}
+
+// イベント詳細(show)
+.heading__event-date{
+  font-size: 3rem;
+}
+.heading__event-name{
+  font-size: 5rem;
+}
+@media (max-width: 767px) {
+  .heading-non--underline{
+    margin-top: 10%;
+ }
+  .heading__event-date{
+    font-size: 2rem;
+  }
+  .heading__event-name{
+    font-size: 3rem;
+  }
+}
+/* タブ1(show) */
+.admin-nomikai-overview-btn{
+  width:100%;
+}
+.content__block--nomikai-overview{
+  .table th{
+    width:20%;
+  }
+}
+// メールプレビューボタンの位置
+.remind-mail{
+  padding-top: 50px;
+}
+// *****ノミカイ進捗：ステップバー*****
+// stepbar
+.progress__stepbar{
+  margin-bottom: 30px;
+.bootstrapWizard li {
+    display: block;
+    float: left;
+    width: 25%;
+    text-align: center;
+    padding-left: 0
+  }
+  .stepbar-tittle{
+    z-index:1 !important;
+  }
+}
+ // **********************************************
+/* タブ２(show) */
+.content{
+  &__block--participants table,&__unpaid-participants table{
+  font-size: 10px;
+  }
+}
+// テーブルをレスポンシブで２つに分けている
+.content__block--participants-responsive{
+  display: none;
+}
+@media (max-width: 767px) {
+  .content__block--participants{
+    display: none;
+  }
+  .content__block--participants-responsive{
+    display: block;
+    td {
+      padding:0 !important;
+    }
+    .btn{
+      margin-right: 5px;
+    }
+  }
+}
+/* タブ3(show) */
+.event-fee-form,.participant-fee-status-form{
+  &__form{
+    border-radius: 5px;
+  }
+}
+.content__block__participants-fee-status, .content__block__unpaid-participants{
+  table td {
+    vertical-align: middle;
+  }
+}
+// メールプレビュー
+.faked-gray-btn{
+  color: #fff !important;
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}
+
+.paid-mail-img{
+  width:30%;
+}
+@media (max-width: 767px) {
+  .content__block__participants-fee-status, .content__block__unpaid-participants{
+    table td {
+      padding:0.3rem;
+    }
+    .participants-image-head,.participants-image{
+      display: none;
+    } 
+    .participants-name{
+      width:30%;
+    }
+  }
+  .member-image{
+    width:82px
+  }
+}
+/* タブ４(show) */
+.content__block--restaurant {
+  tr:first-child td{
+  font-size: 130%;
+  font-weight: bold;
+  }
+  .table th{
+    width:20%;
+  }
+}
+@media (max-width: 767px) {
+  .content__block--restaurant tr:first-child td{
+    font-size: 110%;
+  }
+}
+.content__block--admin-map{
+  width: 60%;
+  height: 300px;
+  background-color: chocolate;
+  margin: 0 auto;
+}
+.admin-restaurant-image{
+  width:100%;
+}
+// メンバー追加ページ + step2
+// 背景色が切れてしまうため
+.content__block--add-event-user{
+  margin-bottom: 70% !important;
+}
+// メンバー追加ページ（会費）
+// 背景色が切れてしまうため
+.content__block--add-event-user-fee {
+  margin-bottom: 35% !important;
+}
+.event-add-member-form label,.event-create-member-form label{
+  font-family: "MPLUS-Regular", "Yu Gothic", "游ゴシック", sans-serif !important;
+  color:#267594 !important;
+}
+.event-add-member-form{
+  width: 50% !important;
+    margin: 0 auto !important;
+    display: flex;
+    flex-direction: column;
+}
+@media (max-width: 767px) {
+  .event-add-member-form label{
+  font-size: 12px;
+  }
+}
+// 編集ページ
+.edit-nomikai-form{
+  padding: 10% 0 20% 0;
+}
+// お店変更ページ
+.restaurant-result{
+  font-family: "MPLUS-Regular", "Yu Gothic", "游ゴシック", sans-serif !important;
+}
+// 背景が途切れてしまうための調整
+.content__block--change-restaurant{
+  margin-bottom: 70% !important;
+}
+// 新規作成
+// 見出し「ノミカイをつくる」
+.heading__create-event{
+  width:200px;
+  color:#fff !important;
+  background-color: #267594;
+  margin: 0 auto;
+  border-radius: 20px;
+}
+@media (max-width: 767px) {
+  .heading__create-event{
+  width:160px;
+  }
+}
+// step2
+// 背景が途切れてしまうための調整
+.content__block--step2{
+  margin-bottom: 40% !important;
+}
+.step2-gurunave,.step2-button{
+  display: block;
+  margin-top: 20px;
+}
+.choose-restaurant{
+  margin-left: 10%;
+}
+.gurunavi-sm-btn{
+font-size: 8px !important;
+padding:1px !important;
+}
+@media (max-width: 1000px) {
+  .choose-restaurant{
+    margin-left: 0;
+    border: 0em;
+    // padding:0px !important;
+  }
+}
+// step3
+// 一部参加者追加ページに合わせて記載
+.event-create-member-form {
+  width:20%;
+  margin-left: 40%;
+}
+@media (max-width: 767px) {
+  .event-create-member-form label{
+  font-size: 12px;
+  }
+  .event-create-member-form{
+    width: 50% !important;
+    margin: 0 auto !important;
+    display: flex;
+    flex-direction: column;
+  }
+}
+// step4
+// 背景が途切れてしまうための調整
+.content__block--step4{
+  margin-bottom: 30% !important;
+}
+.fee-form{
+  width: 20%;
+}
+.fee-name{
+  width: 30%;
+  display: inline-block;
+}
+// 確認画面
+.invitation_mail{
+  width:40%;
+}
+.content__block--confirm{
+  table th{
+    width:25%;
+  }
+}
+// *****新規登録：ステップバー（Bootstrap・見た目のみ）*****
+// stepbar
+.create-nomikai-stepbar{
+  margin-bottom: 30px;
+
+  .bootstrapWizard li {
+    display: block;
+    float: left;
+    width: 20%;
+    text-align: center;
+    padding-left: 0
+  }
+}
+ // **********************************************
+ 

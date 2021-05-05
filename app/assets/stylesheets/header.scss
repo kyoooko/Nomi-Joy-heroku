@@ -1,0 +1,75 @@
+@import "colors";
+// 共通
+// ログイン後のヘッダー(public側とadmin側共通）
+.go-to-otherside__logo{
+  height:48px;
+}
+
+// public
+/* ヘッダーは見えない状態 */
+.public-header{
+  display:none;
+}
+@media (max-width: 767px) {
+/* 767px以下の場合、スライドバーを消しヘッダーを表示 */
+.public-header{
+  display:block;
+}
+.header-nav{
+  background-color:#1b515c ;
+  text-align: center;
+  padding: 0 !important;
+    &:hover{
+      padding:0;
+    }
+  /* ヘッダー：ロゴの大きさと位置 */
+    > a{
+      width:30%;
+      padding-top:1%;
+      padding-bottom:1%;
+    }
+}
+.header-logo{
+  width:30%;
+}
+/* ハンバーガの枠線をなくす */
+  // public側
+  .navbar-light .public-navbar-toggler {
+    border-color: #1b515c !important;
+  }
+  // admin側
+  .navbar-light .admin-navbar-toggler {
+    border-color: #267594 !important;
+  }
+  // ハンバーガーの色を白に
+  .fa-bars{
+    color:#fff;
+  }
+}
+// admin
+.admin{
+   /* ヘッダーは見えない状態 */
+   &-header{
+      display:none;
+  }
+  &-header-nav{
+    background-color: #267594;
+  }
+}
+@media (max-width: 767px) {
+  .admin-header{
+    display:block;
+    &-nav{
+      padding:0 !important;
+      text-align: center;
+      &:hover{
+        padding:0;
+      }
+    }
+    &-nav > a{
+      width:30%;
+      padding-top:1%;
+      padding-bottom:1%;
+    }
+  }
+}

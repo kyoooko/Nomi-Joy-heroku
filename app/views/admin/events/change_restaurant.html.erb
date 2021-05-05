@@ -1,0 +1,47 @@
+<header class="admin-header">
+  <%= render 'admin/logging_in_header' %>
+</header>
+<main class="row">
+  <div class="sidebar admin-sidebar">
+    <%= render 'admin/logging_in_slidebar' %>
+  </div>  
+  <div class="body">
+    <div class="heading">
+      <%# フラッシュメッセージ %>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <h3 class="heading__event-date admin"><%= @event.date.to_s(:date) %>（<%= @day_of_the_week %>）</h3>
+      <h1 class="heading__event-name admin"><%= @event.name %></h1>
+    </div>
+    <div class="content">
+      <div class="content__block--change-restaurant content__block admin-table">
+        <h3>お店を検索<span class="must">&emsp;*</span></h3>
+        <p class="text-muted">（例：&nbsp;"魚金 新宿",&nbsp;"イタリアン,新宿"）</p>
+        <%= form_with model: @event, url: admin_change_restaurant_path(@event), method: :get, local: true do |f| %>
+          <%= text_field_tag :freeword %>
+          <%= f.button type: "submit", class:"btn blue-btn btn-sm"  do %><i class="fas fa-search public-search-btn"></i><% end %>
+          <% if @rests %>
+            <% @rests.each do |rest| %>
+              <p>
+                <%= radio_button_tag :restaurant, rest  %>
+                <%= image_tag(rest["image_url"]["shop_image1"], class: "sm-restaurant-image") %>
+                <span class="restaurant-result responsive-font-sm admin"><%= rest["name"] %></span>
+                <%= link_to rest["url"], target: :_blank, class: "btn blue-btn gurunavi-sm-btn" do %>ぐるなびで見る<% end %>
+              </p>
+            <% end %>
+          <% end %>
+          <p class="step2-button">
+            <%= f.submit "戻る", name: :back, class: "btn admin-white-btn" %>
+            <%= f.submit "変更", name: :change, class: "btn blue-btn" %>
+          </p>
+        <% end %>
+      </div>
+    </div>
+    <%= render "layouts/admin_footer" %>
+  </div>
+</main>
+
+

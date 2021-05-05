@@ -1,0 +1,84 @@
+<header class="admin-header">
+  <%= render 'admin/logging_in_header' %>
+</header>
+<main class="row">
+  <div class="sidebar admin-sidebar">
+    <%= render 'admin/logging_in_slidebar' %>
+  </div>  
+  <div class="body">
+    <div class="heading">
+      <%# フラッシュメッセージ %>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <h5 class="heading__create-event admin">ノミカイをつくる</h5>
+      <h1 class="heading__en admin">Step3</h1>
+    </div>
+    <div class="content">
+      <div class="content__block--step-bar admin-table">
+        <h3>参加者選択</h3>
+        <%# ステップバー（Bootstrap・見た目のみ） %>
+        <div class="create-nomikai-stepbar">
+          <ul class="bootstrapWizard form-wizard">
+            <li class="" data-target="#step1"><span class="step">1</span></li>
+            <li data-target="#step2" class=""><span class="step">2</span></li>
+            <li data-target="#step3" class="active"><span class="step">3</span></li>
+            <li data-target="#step3" class=""><span class="step">4</span></li>
+            <li data-target="#step3" class=""><span class="step">5</span></li>
+          </ul>
+          <div class="clearfix"></div>
+      </div> 
+      <div class="content__block--step3 content__block">
+        <p class="text-muted">※ 参加者を１人以上選択してください<span class="must">&emsp;*</span><br>※後から追加できます</p>
+        <% if @members.present? %>
+          <%= form_with model: @event, url: admin_step4_path,  local: true do |f| %>
+            <table class="table table-borderless">
+              <tbody>
+                <tr class= "">
+                  <td class="event-create-member-form responsive-font-sm">
+                    <%= collection_check_boxes(:event_user, :ids, @members, :id, :name) %>
+                    <div class="actions d-flex justify-content-center mt-2"> 
+                      <%= f.submit "戻る", name: :back, class: "btn admin-white-btn mr-1" %>
+                      <%= f.submit "次へ", class: "btn blue-btn" %>
+                    </div> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <%= f.hidden_field :name %>
+            <%= f.hidden_field :date %>
+            <%= f.hidden_field :begin_time %>
+            <%= f.hidden_field :finish_time %>
+            <%= f.hidden_field :restaurant_id %>
+            <%= f.hidden_field :memo %>
+          <% end %>
+        <% else %>
+          <h3>追加できるメンバーがいません  </h3>
+          <br>
+          <p class="text-muted">カンジの部屋を退室し、メンバータブから申請・承認を行ってください</p>
+        <% end %>
+      </div>
+    </div>
+    <%= render "layouts/admin_footer" %>
+  </div>
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,86 @@
+// Place all the styles related to the public/Users controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "../colors";
+
+// ログイン・サインアップページ
+.content__block--new_user{
+  .sign-btn{
+    // margin-top:10%;
+    width:40%;
+    padding:8px 16px;
+  }
+  // サインアップ画面でエラーメッセージ を出した際背景色が途切れるため
+  .sign-btns{
+    padding-top: 10%;
+  }
+}
+.sign-up-btn,.login-btn{
+  margin-top:10%;
+  width:35%;
+}
+
+// ログインできない場合のエラーメッセージ
+.alert-alert{
+  background-color: #F8D7DA;
+  color: rgb(114, 31, 31);
+}
+// ログイン・サインアップ画面でエラーメッセージ を出した際背景色が途切れるため
+.body--logging-out{
+  height: 170vh ;
+}
+// *******************************************************
+// マイページ
+.mypage-follow-btn{
+  margin-right: 5%;
+}
+.content__block--data td{
+  font-family: "MPLUS-Regular", "Yu Gothic", "游ゴシック", sans-serif !important;
+}
+// マイページ（編集）
+.mypage-image-edit{
+  display:flex;
+  flex-direction: column;
+  width:150px !important;
+  margin: 0 auto;
+}
+// *******************************************************
+// メンバー＆フォローページ
+// タブ１
+.description{
+  margin-bottom: 5%;
+}
+.content__block--menbers{
+  table td {
+    vertical-align: middle;
+  }
+}
+/* タブ２ */
+// テーブルをレスポンシブで２つに分けている
+.content__block__following,.content__block__followed,.content__block__search-users{
+  margin-bottom: 10%;
+}
+.content__block--menbers-responsive{
+  display: none;
+}
+// テーブル
+.content__block__search-users,.content__block__following,.content__block__followed{
+  table td {
+    vertical-align: middle;
+  }
+}
+@media (max-width: 767px) {
+  // ヘッダーと見出しが被らないようにする
+  .heading--non-underline{
+    margin-top: 10%;
+  }
+  .content__block--menbers{
+    display: none;
+  }
+  .content__block--menbers-responsive{
+    display: block;
+  }
+}
+  
+
+

@@ -1,0 +1,25 @@
+<%= link_to events_path do %><%= image_tag("Nomi-Joy.png", class: "sidebar__room-logo") %><% end %>
+<nav class="sidebar__nav">
+  <ul class="nav flex-column">
+    <li><%= link_to events_path,class:"nav-item" do %>
+    <i class="fas fa-home public-icon"></i>&ensp;
+    Home<% end %></li>
+    <li><%= link_to user_path(current_user), class:"nav-item" do %>
+    <i class="fas fa-user public-icon"></i>&ensp;
+    My page<% end %></li>
+    <li><%= link_to users_path, class:"nav-item" do %>
+    <i class="fas fa-user-friends public-icon"></i>&ensp;
+    Members<% end %></li>
+    <li><%= link_to notifications_path, class:"nav-item" do %><%= render "public/notifications/circle" %><% end %></li>
+    <li><%= link_to rooms_path, class:"nav-item" do %>
+    <i class="fas fa-comments public-icon"></i>&ensp;
+    DM<% end %></li>
+    <li><%= link_to destroy_user_session_path, method: :delete, class:"nav-item" do %>
+    <i class="fas fa-sign-out-alt public-icon"></i>&ensp;
+    Sign out<% end %></li>
+  </ul>
+</nav> 
+<div class="sidebar__go-to-otherside">
+  <p class="go-to-otherside__letter">Go to</p>
+  <%= link_to admin_events_path,class:"" do %><%= image_tag("Kanjino-Heya.png", class: "go-to-otherside__logo") %><% end %> 
+</div>

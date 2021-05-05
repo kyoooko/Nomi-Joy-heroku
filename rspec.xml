@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="rspec" tests="1" skipped="0" failures="0" errors="0" time="1.162020" timestamp="2020-08-26T11:28:38+00:00" hostname="localhost.localdomain">
+<properties>
+<property name="seed" value="9669"/>
+</properties>
+<testcase classname="spec.models.user_spec" name="User 1 + 1 は 2 になること" file="./spec/models/user_spec.rb" time="1.144729"></testcase>
+</testsuite>

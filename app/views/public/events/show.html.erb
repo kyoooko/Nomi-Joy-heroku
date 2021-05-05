@@ -1,0 +1,103 @@
+<header class="public-header">
+  <%= render 'public/logging_in_header' %>
+</header>
+<main class="row">
+  <div class="sidebar public-sidebar">
+    <%= render 'public/logging_in_slidebar' %>
+  </div>  
+  <!-- Go toカンジの部屋ボタン（767px以下のみ） -->
+  <%= render 'public/events/go_to_kanjino_heya_button' %>
+  <div class="body">
+    <div class="heading">
+      <h3 class="heading__event-date"><%= @event.date.to_s(:date) %>（<%= @day_of_the_week %>）</h3>
+      <h1 class="heading__event-name"><%= @event.name %></h1>
+    </div>
+    <div class="content">
+      <div class="content__block--overview">
+        <h2 class="block-hedding">ノミカイ概要</h2>
+        <div class="row">
+          <table class="table table-borderless col-md-8">
+            <tbody>
+              <tr>
+                <th scope="row">ノミカイ名</th>
+                <td class="nomal-font">
+                  <%= @event.name %>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row">日にち</th>
+                <td class="nomal-font"><%= @event.date.to_s(:date_jp) %>（<%= @day_of_the_week %>）</td>
+              </tr>
+              <tr>
+                <th scope="row">時間</th>
+                <td class="nomal-font"><%= @event.begin_time.to_s(:time) %> 〜 <%= @event.finish_time.to_s(:time) %></td>
+              </tr>
+              <tr>
+                <th scope="row">場所</th>
+                <td class="nomal-font">
+                  <%= @event.restaurant.name %>&emsp;&emsp;
+                  <span class="restaurant mt-2">
+                    <%# この箇所の画像は767px未満のみ表示 %>
+                    <span class= "restaurant-image-responsive">
+                      <%= image_tag(@event.restaurant.shop_image, class: "middle-image") %>
+                    </span>
+                    <%= link_to @event.restaurant.url, target: :_blank, class: "btn green-btn font-sm" do %>ぐるなびで見る<% end %>
+                  </span>
+                </td>
+              </tr>
+              <tr>
+                <th scope="row"></th>
+                <td class="nomal-font font-xs text-muted"><%= @event.restaurant.access %></td>
+              </tr>
+              <tr>
+                <th scope="row"></th>
+                <td class="nomal-font font-xs text-muted"><%= @event.restaurant.address %></td>
+              </tr>
+              <tr>
+                <th scope="row">会費</th>
+                <td class="nomal-font"><%= @event_user.fee %>円</td>
+              </tr>
+              <tr>
+                <th scope="row">支払い<br>ステータス</th>
+                <td class="nomal-font"><% if @event_user.fee_status == true %>支払済<% else %>未払い<% end %></td>
+              </tr>
+              <tr>
+                <th scope="row">カンジ</th>
+                <td class="d-inline-flex">
+                  <div>
+                    <%# S3+Lambdaで表示 %>
+                    <%= link_to user_path(@admin),class:"" do %><%= image_tag(@image_url, fallback: "no_image.jpg", class:"small-image") %><% end %>
+                  </div>&emsp;
+                  <div class="nomal-font font-sm">
+                    <%= @admin.belongs %>
+                    <%= @admin.position %><br><br>
+                    <%= link_to user_path(@admin),class:"nomal-font" do %><%= @admin.name %><% end %>&emsp;&emsp;
+                    <% unless @admin == current_user%>
+                    <%=link_to room_path(@admin), class:"btn btn-sm green-btn" do %><i class="fas fa-comments public-icon"></i><% end %>
+                    <% end %>
+                    </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <%# この箇所の画像は767px以上のみ表示 %>
+          <div class= "col-md-4 restaurant-image">
+            <%= image_tag(@event.restaurant.shop_image, class: "middle-image") %>
+          </div>
+        </div>
+      </div>
+      <!-- マップ -->
+      <div class="content__block--map">
+        <h2 class="block-hedding">お店のMap</h2>
+        <div class="google-map">
+          <div id='map' class="<%= @event.restaurant.address %>"> </div>
+        </div>
+      </div>
+    </div>
+    <%= render "layouts/footer" %>
+  </div>
+</main>
+
+<%# マップ(JS)  %>
+<script sec="javascripts/address_map.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_KEY'] %>&callback=initMap" async defer></script>

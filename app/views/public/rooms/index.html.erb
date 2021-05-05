@@ -1,0 +1,61 @@
+<header class="public-header">
+  <%= render 'public/logging_in_header' %>
+</header>
+<main class="row">
+  <div class="sidebar public-sidebar">
+    <%= render 'public/logging_in_slidebar' %>
+  </div>  
+  <!-- Go toカンジの部屋ボタン（767px以下のみ） -->
+  <%= render 'public/events/go_to_kanjino_heya_button' %>
+  <div class="body dm-body">
+    <div class="heading">
+      <h1 class="heading__en">Direct Message</h1>
+      <h3 class="heading__ja">ダイレクトメッセージ</h3>
+    </div>
+    <div class="content">
+      <% if @members.present?%>
+         <%# 検索フォーム（実装中） %>
+        <%# <div class="content__block--search">
+          <form class="dm-search-form">  
+            <div class="form-group col-3">
+                <select class="form-control">
+                    <option>氏名</option>
+                    <option>会社名・所属</option>
+                </select>
+            </div>
+            <div class="form-group col-6">
+              <input type="text" class="form-control">
+            </div>
+          </form>
+        </div> %>
+        <div class="content__block--dm-menbers">
+          <table class="table dm-table">
+            <thead>
+              <tr>
+                <th scope="col"></th>
+                <th scope="col">氏名</th>
+                <th scope="col">会社名・所属・役職</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @members.each do |member| %>
+                <%# 参照先のS3オブジェクトURLを作成 %>
+                <% image_url = "https://dmm-cloud-lesson10-image-files-resize.s3-ap-northeast-1.amazonaws.com/store/" + member.image_id + "-thumbnail." %>
+                <tr>
+                  <%# S3+Lambdaで表示 %>
+                  <th scope="row"><%= link_to user_path(member),class:"" do %><%= image_tag(image_url, fallback: "no_image.jpg", class:"small-image") %><% end %></th>
+                  <td><%= link_to user_path(member),class:"nomal-font font-sm" do %><%= member.name %><% end %></td>
+                  <td class="nomal-font responsive-font-sm"><%= member.belongs %><br><%= member.position %></td>
+                  <td><%=link_to room_path(member), class:"btn btn-sm green-btn" do %><i class="fas fa-envelope public-icon"></i><% end %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% else %>
+         <div class="text-muted dm-index-no-content">ダイレクトメッセージを送れるメンバーはまだいません</div>
+      <% end %>
+    </div>
+    <%= render "layouts/footer" %>
+  </div>
+</main>

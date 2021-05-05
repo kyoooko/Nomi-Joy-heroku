@@ -1,0 +1,10 @@
+<%= link_to root_path do %><%= image_tag("Nomi-Joy.png", class: "sidebar__room-logo") %><% end %>
+<nav class="sidebar__nav">
+  <ul class="nav flex-column">
+    <li><%= link_to root_path,class:"nav-item" do %>
+    <i class="fas fa-home public-icon"></i>&ensp;
+    Top<% end %></li>
+    <li><%= link_to new_user_registration_path,class:"nav-item" do %><i class="fas fa-user-plus public-icon"></i>&ensp;Sign up<% end %></li>
+    <li><%= link_to new_user_session_path,class:"nav-item" do %><i class="fas fa-sign-in-alt public-icon"></i>&ensp;Login<% end %></li>
+  </ul>
+</nav>   

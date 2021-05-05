@@ -1,0 +1,29 @@
+<header class="admin-header">
+  <%= render 'admin/logging_in_header' %>
+</header>
+<main class="row">
+  <div class="sidebar admin-sidebar">
+    <%= render 'admin/logging_in_slidebar' %>
+  </div>  
+  <div class="body">
+    <div class="heading">
+      <h1 class="heading__en admin">Notice</h1>
+      <h3 class="heading__ja admin">通知一覧</h3>
+    </div>
+    <!-- 新規作成ボタン -->
+      <%= render 'admin/events/create_event_button' %>
+    <div class="content content__block__notice">
+      <% if @notifications.exists? %>
+        <%= render @notifications %>
+        <div class="paginate-bar">
+          <%= paginate @notifications %>
+        </div>
+      <% else %>
+          新しい通知はありません
+      <% end %>
+    </div>
+  <%= render "layouts/admin_footer" %>
+  </div>
+</main>
+
+        

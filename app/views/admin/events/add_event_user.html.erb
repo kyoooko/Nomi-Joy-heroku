@@ -1,0 +1,47 @@
+<header class="admin-header">
+  <%= render 'admin/logging_in_header' %>
+</header>
+<main class="row">
+  <div class="sidebar admin-sidebar">
+    <%= render 'admin/logging_in_slidebar' %>
+  </div>  
+  <div class="body">
+    <div class="heading">
+      <%# フラッシュメッセージ %>
+      <% flash.each do |message_type, message| %>
+        <div class="alert alert-<%= message_type %>">
+          <%= message %>
+        </div>
+      <% end %>
+      <h3 class="heading__event-date admin"><%= @event.date.to_s(:date) %>（<%= @day_of_the_week %>）</h3>
+      <h1 class="heading__event-name admin"><%= @event.name %></h1>
+    </div>
+    <div class="content">
+      <div class="content__block--add-event-user content__block ">
+        <p class="text-muted">※ 参加者を１人以上選択してください<span class="must">&emsp;*</span><br>※後から追加できます</p>
+        <% if @unselected_members.present? %>
+          <%= form_with model: @event_user, url: admin_add_event_user_fee_path,  local: true, class: "" do |f| %>
+            <table class="table table-borderless">
+              <tbody>
+                <tr class= "">
+                  <td class="event-add-member-form">
+                    <%= collection_check_boxes(:event_user, :ids, @unselected_members, :id, :name) %>
+                    <div class="actions d-flex justify-content-center mt-5"> 
+                      <%= f.submit "戻る", name: :back, class: "btn admin-white-btn" %>
+                      <%= f.submit "次へ", class: "btn blue-btn mr-1" %>
+                    </div> 
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          <% end %>
+        <% else %>
+          <h3>追加できるメンバーがいません  </h3>
+          <br>
+          <p class="text-muted">カンジの部屋を退室し、メンバータブから申請・承認を行ってください</p>
+        <% end %>
+      </div>
+    </div>
+    <%= render "layouts/admin_footer" %>
+  </div>
+</main>
